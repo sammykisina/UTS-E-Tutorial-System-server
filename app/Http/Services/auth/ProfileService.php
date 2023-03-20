@@ -9,11 +9,21 @@ use App\Models\User;
 class ProfileService {
     public function getLecturerProfile(User $lecturer): User {
         return User::query()
-        ->where('id', $lecturer->id)
-        ->with([
-            'units', 
-            'tutorials.unit', 
-            'tutorials.questions.answers', 
+            ->where('id', $lecturer->id)
+            ->with([
+                'units',
+                'tutorials.unit',
+                'tutorials.questions.answers',
+                'tutorials.results.student'
+            ])->first();
+    }
+
+    public function getStudentProfile(User $student): User {
+        return User::query()
+            ->where('id', $student->id)
+            ->with([
+                'course.units',
+                'results.tutorial.unit'
             ])->first();
     }
 }

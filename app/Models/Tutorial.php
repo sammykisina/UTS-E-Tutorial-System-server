@@ -13,6 +13,7 @@ class Tutorial extends Model {
     use HasFactory;
 
     protected $fillable = [
+        'code',
         'description',
         'icon',
         'numberOfQuestions',
@@ -23,6 +24,7 @@ class Tutorial extends Model {
         'unit_id',
         'bgColor',
         'dueDate',
+        'numberOfValidDays'
     ];
 
     protected $casts = [
@@ -41,6 +43,13 @@ class Tutorial extends Model {
         return $this->hasMany(
             related: Question::class,
             foreignKey: 'tutorial_id'
+        );
+    }
+
+    public function results(): HasMany {
+        return $this->hasMany(
+            related:Result::class,
+            foreignKey:'tutorial_id'
         );
     }
 }

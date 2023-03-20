@@ -8,15 +8,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up(): void {
-        Schema::create('questions', function (Blueprint $table): void {
+        Schema::create('results', function (Blueprint $table): void {
             $table->id();
 
-            $table->string(column: 'question');
-            $table->string(column: 'correctAnswer');
+            $table->integer(column: 'points');
 
             $table->foreignId(column: 'tutorial_id')
                 ->index()
+                ->nullable()
                 ->constrained()
+                ->nullOnDelete();
+
+            $table->unsignedBigInteger(column: 'student_id');
+            $table->foreign(columns:'student_id')
+                ->references(columns: 'id')
+                ->on(table: "users")
                 ->cascadeOnDelete();
 
             $table->timestamps();

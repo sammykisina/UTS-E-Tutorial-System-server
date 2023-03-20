@@ -32,5 +32,15 @@ Route::prefix('lecturer')
     );
 
 /**
+ * student routes
+ */
+Route::prefix('student')
+    ->as('student:')
+    ->middleware(['auth:sanctum', 'ability:student'])
+    ->group(
+        base_path('routes/v1/student.php')
+    );
+
+/**
  * authenticated users routes
  */

@@ -65,4 +65,11 @@ class User extends Authenticatable {
             foreignKey: 'lecturer_id'
         )->orderBy('created_at', 'DESC');
     }
+
+    public function results(): HasMany {
+        return $this->hasMany(
+            related: Result::class,
+            foreignKey: 'student_id'
+        );
+    }
 }

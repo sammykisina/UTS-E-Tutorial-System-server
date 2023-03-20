@@ -6,14 +6,9 @@ namespace App\Http\Requests\Lecturer;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TutorialStoreRequest extends FormRequest {
+class TutorialUpdateRequest extends FormRequest {
     public function rules(): array {
         return [
-            'code' => [
-                'required',
-                'string',
-                'unique:tutorials,code'
-            ],
             'description' => [
                 'required',
                 'string'
@@ -25,11 +20,6 @@ class TutorialStoreRequest extends FormRequest {
             'numberOfQuestions' => [
                 'required',
                 'numeric'
-            ],
-            'lecturer_id' => [
-                'required',
-                'numeric',
-                'exists:users,id'
             ],
             'unit_id' => [
                 'required',
@@ -58,7 +48,7 @@ class TutorialStoreRequest extends FormRequest {
         ];
     }
 
-    public function getNewTutorialData(): array {
-        return $this->validated();
-    }
+     public function getUpdatedTutorialData(): array {
+         return  $this->validated();
+     }
 }

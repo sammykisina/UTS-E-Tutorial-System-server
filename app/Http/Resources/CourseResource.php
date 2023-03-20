@@ -15,6 +15,13 @@ class CourseResource extends JsonResource {
             'attributes' => [
                 'name' => $this->name,
                 'createdAt' => $this->created_at
+            ],
+            'relationships' => [
+                'units' => UnitResource::collection(
+                    resource: $this->whenLoaded(
+                        relationship: 'units'
+                    )
+                )
             ]
         ];
     }

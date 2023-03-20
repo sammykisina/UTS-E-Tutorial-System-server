@@ -10,6 +10,7 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('tutorials', function (Blueprint $table): void {
             $table->id();
+            $table->string(column: 'code');
 
             $table->string(column: 'description');
             $table->string(column: 'icon');
@@ -17,6 +18,7 @@ return new class extends Migration {
             $table->integer(column: 'numberOfQuestions');
             $table->integer(column: 'numberOfPointsForEachQuestion');
             $table->integer(column: 'timeToTakeInTutorial');
+            $table->integer(column: 'numberOfValidDays');
             $table->boolean(column: 'published')->default(value: false);
 
             $table->unsignedBigInteger(column: 'lecturer_id');
@@ -28,7 +30,7 @@ return new class extends Migration {
                 ->index()
                 ->constrained();
 
-            $table->timestamp(column: 'dueDate');
+            $table->timestamp(column: 'dueDate')->nullable();
             $table->timestamps();
         });
     }

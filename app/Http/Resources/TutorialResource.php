@@ -13,6 +13,7 @@ class TutorialResource extends JsonResource {
             'id' => $this->id,
             'type' => 'tutorial',
             'attributes' => [
+                'code' => $this->code,
                 'description' => $this->description,
                 'icon' => $this->icon,
                 'numberOfQuestions' => $this->numberOfQuestions,
@@ -20,7 +21,8 @@ class TutorialResource extends JsonResource {
                 'numberOfPointsForEachQuestion' => $this->numberOfPointsForEachQuestion,
                 'published' => $this->published,
                 'bgColor' => $this->bgColor,
-                'dueDate' => $this->dueDate
+                'dueDate' => $this->dueDate,
+                'numberOfValidDays' => $this->numberOfValidDays
             ],
             'relationships' => [
                 'unit' => new UnitResource(
@@ -32,7 +34,13 @@ class TutorialResource extends JsonResource {
                     resource: $this->whenLoaded(
                         relationship: 'questions'
                     )
+                ),
+                'results' => ResultResource::collection(
+                    resource: $this->whenLoaded(
+                        relationship: 'results'
+                    )
                 )
+
             ]
         ];
     }

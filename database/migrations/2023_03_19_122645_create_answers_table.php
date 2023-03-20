@@ -16,7 +16,8 @@ return new class extends Migration {
 
             $table->foreignId(column: 'question_id')
                 ->index()
-                ->constrained();
+                ->constrained()
+                ->cascadeOnDelete();
 
             $table->timestamps();
         });

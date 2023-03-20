@@ -9,6 +9,7 @@ use App\Http\Requests\Lecturer\QuestionStoreRequest;
 use App\Http\Resources\TutorialResource;
 use App\Http\Services\Lecturer\TutorialQnService;
 use App\Models\Tutorial;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -35,6 +36,13 @@ class StoreQuestionController extends Controller {
                     ->with(['unit', 'questions.answers'])
                     ->where('id', $request->get(key: 'tutorial_id'))
                     ->first();
+
+            if ($tutorial->numberOfQuestions == count($tutorial->questions)) {
+                $tutorial->update([
+                    'published' => true,
+                    'dueDate' => Carbon::now()->addDays($tutorial->numberOfValidDays)
+                ]);
+            }
 
             DB::commit();
 
