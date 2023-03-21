@@ -7,31 +7,29 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class StudentResource extends JsonResource {
+class DiscussionResource extends JsonResource {
     public function toArray(Request $request): array {
         return [
             'id' => $this->id,
-            'type' => 'student',
             'attributes' => [
-                'regNumber' => $this->regNumber,
-                'name' => $this->name,
-                'email' => $this->email,
+                'discussion' => $this->discussion,
+                'bgColor' => $this->bgColor,
                 'createdAt' => $this->created_at
             ],
             'relationships' => [
-                'course' => new CourseResource(
+                'owner' => new StudentResource(
                     resource: $this->whenLoaded(
-                        relationship: 'course'
+                        relationship: 'owner'
                     )
                 ),
-                'results' => ResultResource::collection(
+                'unit' => new UnitResource(
                     resource: $this->whenLoaded(
-                        relationship: 'results'
+                        relationship: 'unit'
                     )
                 ),
-                'discussions' => DiscussionResource::collection(
-                    $this->whenLoaded(
-                        relationship: 'discussions'
+                'comments' => CommentResource::collection(
+                    resource: $this->whenLoaded(
+                        relationship: 'comments'
                     )
                 )
             ]

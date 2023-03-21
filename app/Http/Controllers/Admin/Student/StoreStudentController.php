@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin\Student;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StudentStoreRequest;
 use App\Http\Services\Admin\StudentService;
+use App\Notifications\AccountCreated;
 use Illuminate\Http\JsonResponse;
 use JustSteveKing\StatusCode\Http;
 
@@ -15,7 +16,8 @@ class StoreStudentController extends Controller {
         StudentStoreRequest $request,
         StudentService $studentService
     ): JsonResponse {
-        if ($studentService->createStudent(newStudentData: $request->getNewStudentData())) {
+        if ($student = $studentService->createStudent(newStudentData: $request->getNewStudentData())) {
+            $student->notify(new AccountCreated());
             return response()->json(
                 data: [
                     'error' => 0,

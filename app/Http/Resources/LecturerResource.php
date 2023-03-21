@@ -28,6 +28,11 @@ class LecturerResource extends JsonResource {
                     $this->whenLoaded(
                         relationship: 'tutorials'
                     )
+                ),
+                'discussions' => DiscussionResource::collection(
+                    $this->whenLoaded(
+                        relationship: 'discussions'
+                    )
                 )
             ]
         ];

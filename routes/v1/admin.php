@@ -15,7 +15,6 @@ use App\Http\Controllers\Admin\Student\IndexStudentController;
 use App\Http\Controllers\Admin\Student\StoreStudentController;
 use App\Http\Controllers\Admin\Student\UpdateStudentController;
 use App\Http\Controllers\Admin\Unit\DeleteUnitController;
-use App\Http\Controllers\Admin\Unit\IndexUnitController;
 use App\Http\Controllers\Admin\Unit\StoreUnitController;
 use App\Http\Controllers\Admin\Unit\UpdateUnitController;
 use Illuminate\Support\Facades\Route;
@@ -44,7 +43,6 @@ Route::group([
     'prefix' => 'units',
     'as' => 'units:',
 ], function () {
-    Route::get('/', IndexUnitController::class)->name('unitIndex');
     Route::post('/', StoreUnitController::class)->name('unitStore');
     Route::patch('/{unit}', UpdateUnitController::class)->name('unitUpdate');
     Route::delete('/{unit}', DeleteUnitController::class)->name('unitDelete');

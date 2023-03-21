@@ -44,3 +44,9 @@ Route::prefix('student')
 /**
  * authenticated users routes
  */
+Route::prefix('users')
+    ->as('users:')
+    ->middleware(['auth:sanctum'])
+    ->group(
+        base_path('routes/v1/authenticated.php')
+    );

@@ -14,7 +14,10 @@ class ProfileService {
                 'units',
                 'tutorials.unit',
                 'tutorials.questions.answers',
-                'tutorials.results.student'
+                'tutorials.results.student',
+                'discussions.owner',
+                'discussions.unit',
+                'discussions.comments.owner'
             ])->first();
     }
 
@@ -23,7 +26,20 @@ class ProfileService {
             ->where('id', $student->id)
             ->with([
                 'course.units',
-                'results.tutorial.unit'
+                'results.tutorial.unit',
+                'discussions.owner',
+                'discussions.unit',
+                'discussions.comments.owner'
             ])->first();
+    }
+
+    public function updatePassword(array $updatePasswordData): bool {
+        $user = User::query()
+            ->where('email', $updatePasswordData['email'])
+            ->first();
+
+        return $user->update([
+            'password' => $updatePasswordData['password']
+        ]);
     }
 }

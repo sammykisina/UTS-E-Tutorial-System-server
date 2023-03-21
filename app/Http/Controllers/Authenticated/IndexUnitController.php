@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Admin\Unit;
+namespace App\Http\Controllers\Authenticated;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UnitResource;

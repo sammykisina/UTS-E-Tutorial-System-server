@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin\Lecturer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\LecturerStoreRequest;
 use App\Http\Services\Admin\LecturerService;
+use App\Notifications\AccountCreated;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use JustSteveKing\StatusCode\Http;
@@ -23,6 +24,7 @@ class StoreLecturerController extends Controller {
             );
             $lecturer->units()->sync($request->get(key: 'unitIds'));
             DB::commit();
+            $lecturer->notify(new AccountCreated());
 
             return response()->json(
                 data: [
