@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Services\Auth;
 
 use App\Models\User;
+use App\Notifications\SystemPasswordUpdate;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileService {
     public function getLecturerProfile(User $lecturer): User {
@@ -41,5 +43,13 @@ class ProfileService {
         return $user->update([
             'password' => $updatePasswordData['password']
         ]);
+    }
+
+    public function forgotPassword(User $user) {
+        $user->update([
+            'password' => Hash::make(value: $user->regNumber)
+        ]);
+
+        $user->notify(new SystemPasswordUpdate);
     }
 }
