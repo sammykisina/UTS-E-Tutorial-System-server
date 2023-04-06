@@ -22,6 +22,6 @@ class AccountCreated extends Notification {
         return (new MailMessage)
                     ->line('Welcome '. $notifiable->name .' to UTS E-Tutorial System')
                     ->line('Your account was created by the admin.')
-                    ->line('Use your workId/Reg Number for both workId/regNumber and password to login');
+                    ->line('Use '. $notifiable->regNumber .' for both workId/regNumber and password to login');
     }
 }
