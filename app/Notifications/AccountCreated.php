@@ -20,8 +20,8 @@ class AccountCreated extends Notification {
 
     public function toMail(object $notifiable): MailMessage {
         return (new MailMessage)
-                    ->line('Welcome '. $notifiable->name .' to UTS E-Tutorial System')
+                    ->line('Welcome '.$notifiable->name.' to UTS E-Tutorial System')
                     ->line('Your account was created by the admin.')
-                    ->line('Use '. $notifiable->regNumber .' for both workId/regNumber and password to login');
+                    ->line('Use '.$notifiable->regNumber.' for both workId/regNumber and password to login');
     }
 }

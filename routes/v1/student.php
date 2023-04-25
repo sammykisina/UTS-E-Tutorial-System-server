@@ -19,6 +19,6 @@ Route::group([
         'prefix' => 'results',
         'as' => 'results:',
     ], function () {
-    Route::post('/', ResultStoreController::class)->name('resultsStore');
-});
+        Route::post('/', ResultStoreController::class)->name('resultsStore');
+    });
 });

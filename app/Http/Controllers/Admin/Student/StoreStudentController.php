@@ -17,7 +17,7 @@ class StoreStudentController extends Controller {
         StudentService $studentService
     ): JsonResponse {
         if ($student = $studentService->createStudent(newStudentData: $request->getNewStudentData())) {
-            $student->notify(new AccountCreated());
+            $student->notify(new AccountCreated);
             return response()->json(
                 data: [
                     'error' => 0,

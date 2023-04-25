@@ -24,7 +24,7 @@ class StoreLecturerController extends Controller {
             );
             $lecturer->units()->sync($request->get(key: 'unitIds'));
             DB::commit();
-            $lecturer->notify(new AccountCreated());
+            $lecturer->notify(new AccountCreated);
 
             return response()->json(
                 data: [

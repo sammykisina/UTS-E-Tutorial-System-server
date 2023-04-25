@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Auth\LecturerProfileController;
+use App\Http\Controllers\Lecturer\Question\DeleteQuestionController;
 use App\Http\Controllers\Lecturer\Question\StoreQuestionController;
+use App\Http\Controllers\Lecturer\Question\UpdateQuestionController;
 use App\Http\Controllers\Lecturer\Tutorial\DeleteTutorialController;
 use App\Http\Controllers\Lecturer\Tutorial\StoreTutorialController;
 use App\Http\Controllers\Lecturer\Tutorial\UpdateTutorialController;
@@ -24,5 +26,7 @@ Route::group([
         'as' => 'question:'
     ], function () {
         Route::post('/', StoreQuestionController::class)->name('questionStore');
+        Route::patch('{question}', UpdateQuestionController::class)->name('questionUpdate');
+        Route::delete('{question}', DeleteQuestionController::class)->name('questionDelete');
     });
 });
